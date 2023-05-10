@@ -1,10 +1,11 @@
-nand:: Bool->Bool->Bool
-
--- ---------------------------------------------------- 
--- maj retorna True sii al menos 2 argumentos son True.
--- ----------------------------------------------------
-maj :: Bool −> Bool −> Bool −> Bool
-
+nand :: Bool -> Bool -> Bool
+nand True True = False
+nand a b = True
+maj :: Bool -> Bool -> Bool -> Bool
+maj True True _ = True
+maj True _ True = True
+maj _ True True = True
+maj _ _ _ = False
 
 -- ---------------------------------------------------- 
 -- Para las siguientes funciones se debe respetar el 
@@ -18,8 +19,11 @@ maj :: Bool −> Bool −> Bool −> Bool
 --		paraTodo [0,2,4,6] [2,2,4,4,4,5,6] even  
 --		retorna True.
 -- ----------------------------------------------------
-paraTodo :: [Int] -> [a] -> (Int -> [a] -> Bool)-> Bool
+--paraTodo :: [Int] -> [a] -> (Int -> [a] -> Bool)-> Bool
+--paraTodo ns xs p = and [(xs!!n) |n <- ns,p n xs]
 
+paraTodo :: [Int] -> [Bool] -> (Int -> [Bool] -> Bool)-> Bool
+paraTodo ns xs p = and [(xs!!n) |n <- ns,p n xs]
 
 
 -- ----------------------------------------------------
@@ -30,7 +34,17 @@ paraTodo :: [Int] -> [a] -> (Int -> [a] -> Bool)-> Bool
 --		Ejemplo: existe [0,1,2,3] [4,1,2,6] odd
 --		retorna True.
 -- ----------------------------------------------------
-existe :: [Int] -> [a] -> (Int -> [a] -> Bool)-> Bool
+--existe :: [Int] -> [a] -> (Int -> [a] -> Bool)-> Bool
+--existe ns xs p = or [(xs!!n) |n <- ns,p n xs]
 
+existe :: [Int] -> [Bool] -> (Int -> [Bool] -> Bool)-> Bool
+existe ns xs p = or [(xs!!n) |n <- ns,p n xs]
 
+sumatoria :: [Int] -> [Integer] -> Integer
+sumatoria ns xs = sum [(xs!!n) | n <- ns]
 
+productoria :: [Int] -> [Integer] -> Integer
+productoria ns xs = product [(xs!!n) | n <- ns]
+
+contatoria :: [Int] -> [Int] -> Int
+contatoria ns xs = length [(xs!!n) | n <- ns]
